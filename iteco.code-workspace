@@ -1,0 +1,32 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../mbedtls"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.DS_Store": false,
+			"**/.hg": false,
+			"**/.svn": false,
+			"**/build*/": true,
+			"**/CVS": false
+		},
+		"files.associations": {
+			"net_sockets.h": "c",
+			"buffer_view.h": "c",
+			"random": "cpp",
+			"inet.h": "c",
+			"atomic": "cpp",
+			"cstdint": "cpp",
+			"__hash_table": "c",
+			"*.tcc": "c",
+			"stdatomic.h": "c",
+			"sectioning.h": "c",
+			"sending.h": "c"
+		}
+	}
+}
