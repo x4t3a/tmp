@@ -41,11 +41,6 @@ recvDataAndFeedItToPacketer(
             sections
         );
 
-        if (true == drop)
-        {
-            fputs("DROP!!!DROP!!!DROP!!!DROP!!!DROP!!!DROP!!!DROP!!!DROP!!!", stderr);
-        }
-
         if (false == drop)
         {
             atomic_store(&(packeter_ctx->section_states[subsection]), (unsigned char) S_SERVED_BY_SOCKET);
@@ -65,20 +60,23 @@ recvDataAndFeedItToPacketer(
             &connection_interrupted // connection error
         );
 
-        if ((0 == msg_size) || connection_interrupted) // valid and not so valid exit
-        {
-            atomic_store(&(packeter_ctx->section_states[subsection]), (unsigned char) S_UNUSED);
-            break;
-        }
-
-        Packet* packet = &packets_buffer[subsection];
-        PacketNumber packet_no = ntohl(packet->header.packet_no);
-        printf("Received: packet no: %d, section: %d, msg_size: %d\n", (int) packet_no, (int) subsection, (int) msg_size);
-
         if (false == drop)
         {
-            atomic_store(&(packeter_ctx->section_states[subsection]), (unsigned char) S_UNUSED);
+            if ((0 == msg_size) || connection_interrupted) // valid and not so valid exit
+            {
+                atomic_store(&(packeter_ctx->section_states[subsection]), (unsigned char) S_UNUSED);
+                break;
+            }
+
+            Packet* packet = &packets_buffer[subsection];
+            PacketNumber packet_no = ntohl(packet->header.packet_no);
+            printf("Received: packet no: %d, section: %d, msg_size: %d\n", (int) packet_no, (int) subsection, (int) msg_size);
+
             handleRecvMsg(packeter_ctx, subsection);
+        }
+        else
+        {
+            printf("*** PACKET DROP *** PACKET DROP *** PACKET DROP ***\n");
         }
     }
 }
