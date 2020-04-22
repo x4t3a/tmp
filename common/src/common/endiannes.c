@@ -46,4 +46,30 @@ ntohd(void* data, size_t data_size)
     }
 }
 
+#ifdef __linux__
+
+uint64_t
+htonll(uint64_t data)
+{
+    if (IS_LIL_ENDIAN)
+    {
+        reverseEndian(&data, sizeof(data));
+    }
+
+    return data;
+}
+
+uint64_t
+ntohll(uint64_t data)
+{
+    if (IS_LIL_ENDIAN)
+    {
+        reverseEndian(&data, sizeof(data));
+    }
+
+    return data;
+}
+
+#endif
+
 #undef IS_LIL_ENDIAN

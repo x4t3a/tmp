@@ -7,6 +7,8 @@
 #include "packeter.h"
 #include "socket_serving.h"
 #include "sectioning.h"
+
+#include <arpa/inet.h>
 #include <pthread.h>
 #include <stdatomic.h>
 

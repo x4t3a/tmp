@@ -11,6 +11,7 @@
 #include <common/hash.h>
 #include <common/endiannes.h>
 
+#include <arpa/inet.h>
 #include <inttypes.h>
 #include <stdio.h>
 #include <string.h>
